@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -6,15 +8,29 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="https://play-lh.googleusercontent.com/1zmghmEjeS-rhXa2BX_LY5NuAjhVRUg1OxL5Hjymk6ORWNhLuUemHx61zBNmaOfONvQ" alt="" class="block h-9 w-auto fill-current text-gray-800">
                     </a>
                 </div>
+
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Easypay') }}
                     </x-nav-link>
+                    <x-nav-link href="/Support">
+                        {{ __('Поддержка') }}
+                    </x-nav-link>
+                    <div class="dropdown sm:flex">
+                        <button class="btn btn-body dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Категории
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/MINECRAFT">Minecraft</a></li>
+                            <li><a class="dropdown-item" href="/CSGO">CS:GO</a></li>
+                            <li><a class="dropdown-item" href="/DOTA2">Dota 2</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -33,10 +49,26 @@
                         </button>
                     </x-slot>
 
+
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Профиль') }}
                         </x-dropdown-link>
+
+                        <x-dropdown-link href='addProduct'>
+                            {{ __('Добавить товар') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link href='MyProducts'>
+                            {{ __('Мои товары') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link href='Wallet'>
+                            {{ __('Кошелёк') }}
+                        </x-dropdown-link>
+
+
+
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -45,7 +77,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Выход') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
