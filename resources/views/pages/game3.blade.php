@@ -11,11 +11,11 @@
                 <div class="p-6 text-gray-900">
 
 
-
-
+                    @foreach($Products as $Product)
                         <p><a href="/Product/{{$Product->id ?? ''}}">{{$Product->ProductName ?? ''}}</a></p>
-                        <p>{{$Product->Price ?? 'Game not found'}}</p>
+                        <p>{{$Product->Price ?? 'Products not found'}}</p>
                         <p class="text-right">{{$Product->author ?? ''}}</p>
+                    @endforeach
 
 
                 </div>
@@ -23,3 +23,4 @@
         </div>
     </div>
 </x-app-layout>
+

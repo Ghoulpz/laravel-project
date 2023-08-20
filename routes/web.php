@@ -31,34 +31,36 @@ Route::get('/addProduct', function () {
 
 Route::get('/MINECRAFT', function (Request $request) {
     $gameNumb = '1';
-    $Product = Product::where('GameNumber', $gameNumb)->first();
-    return view('pages.game1', ['Product'=>$Product]);
+    $Products = Product::where('GameNumber', $gameNumb)->get();
+    return view('pages.game1', ['Products'=>$Products]);
 }
 )->middleware(['auth', 'verified'])->name('pages.game1');
 
 Route::get('/CSGO', function (Request $request) {
     $gameNumb = '2';
-    $Product = Product::where('GameNumber', $gameNumb)->first();
-    return view('pages.game2', ['Product'=>$Product]);
+    $Products = Product::where('GameNumber', $gameNumb)->get();
+    return view('pages.game2', ['Products'=>$Products]);
 }
 )->middleware(['auth', 'verified'])->name('pages.game2');
 
 Route::get('/DOTA2', function (Request $request) {
     $gameNumb = '3';
-    $Product = Product::where('GameNumber', $gameNumb)->first();
-    return view('pages.game3', ['Product'=>$Product]);
+    $Products = Product::where('GameNumber', $gameNumb)->get();
+    return view('pages.game3', ['Products'=>$Products]);
 }
 )->middleware(['auth', 'verified'])->name('pages.game3');
+
+Route::get('/MyProducts', function (Request $request) {
+    $author = auth()->user()->name;
+    $Products = Product::where('author', $author)->get();
+    return view('pages.MyProducts', ['Products'=>$Products]);
+}
+)->middleware(['auth', 'verified'])->name('pages.MyProducts');
 
 Route::get('/Support', function (){
     return view('pages.support');
 }
 )->middleware(['auth', 'verified'])->name('pages.support');
-
-Route::get('/MyProducts', function (){
-    return view('pages.MyProducts');
-}
-)->middleware(['auth', 'verified'])->name('pages.MyProducts');
 
 Route::get('/Wallet', function (){
     return view('pages.Wallet');
@@ -87,6 +89,12 @@ $Product = Product::where('id', $ProductId)->first();
     return view('pages.Product', ['Product'=>$Product]);
 }
 );
+
+Route::post('/deletedProduct/{id}', function (Request $request) {
+    $ProductId = $request->id;
+    $Product = Product::where('id', $ProductId)->delete();
+    return view('pages.deletedProduct');
+});
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
